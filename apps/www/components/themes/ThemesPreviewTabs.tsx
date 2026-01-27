@@ -14,8 +14,8 @@ import {
 import {
   ToggleButtonPrimitive,
 } from "@/registry/wuhan/blocks/toggle-button/toggle-button-01";
-import { ComposedMessageList, type MessageItem } from "@/registry/wuhan/examples/message/message-composed-demo";
-import { ComposedSender } from "@/registry/wuhan/examples/sender/sender-composed-demo";
+import { ComposedMessageList, type MessageItem } from "@/registry/wuhan/examples/blocks/message/message-composed-demo";
+import { ComposedSender } from "@/registry/wuhan/examples/blocks/sender/sender-composed-demo";
 import { Button } from "@/registry/wuhan/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/registry/wuhan/ui/card";
 import { Input } from "@/registry/wuhan/ui/input";

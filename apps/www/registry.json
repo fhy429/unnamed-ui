@@ -1413,69 +1413,115 @@
       }
     },
     {
+      "name": "accordion",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/alert-dialog.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/aspect-ratio.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/avatar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/badge.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/breadcrumb.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-slot"
-      ],
       "files": [
         {
           "path": "registry/wuhan/ui/button.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/button.tsx"
+          "type": "registry:ui"
         }
       ]
     },
     {
-      "name": "collapsible",
+      "name": "button-group",
       "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-collapsible"
+      "registryDependencies": [
+        "separator"
       ],
       "files": [
         {
-          "path": "registry/wuhan/ui/collapsible.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/collapsible.tsx"
+          "path": "registry/wuhan/ui/button-group.tsx",
+          "type": "registry:ui"
         }
       ]
     },
     {
-      "name": "separator",
+      "name": "calendar",
       "type": "registry:ui",
       "dependencies": [
-        "@radix-ui/react-separator"
+        "react-day-picker@latest",
+        "date-fns"
+      ],
+      "registryDependencies": [
+        "button"
       ],
       "files": [
         {
-          "path": "registry/wuhan/ui/separator.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/separator.tsx"
-        }
-      ]
-    },
-    {
-      "name": "textarea",
-      "type": "registry:ui",
-      "files": [
-        {
-          "path": "registry/wuhan/ui/textarea.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/textarea.tsx"
-        }
-      ]
-    },
-    {
-      "name": "tooltip",
-      "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-tooltip"
-      ],
-      "files": [
-        {
-          "path": "registry/wuhan/ui/tooltip.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/tooltip.tsx"
+          "path": "registry/wuhan/ui/calendar.tsx",
+          "type": "registry:ui"
         }
       ]
     },
@@ -1485,22 +1531,113 @@
       "files": [
         {
           "path": "registry/wuhan/ui/card.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/card.tsx"
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "dependencies": [
+        "embla-carousel-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/carousel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "dependencies": [
+        "recharts@2.15.4"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/chart.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/checkbox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input-group"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/combobox.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "dependencies": [
+        "cmdk"
+      ],
+      "registryDependencies": [
+        "dialog",
+        "input-group"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/command.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/context-menu.tsx",
+          "type": "registry:ui"
         }
       ]
     },
     {
       "name": "dialog",
       "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-dialog"
+      "registryDependencies": [
+        "button"
       ],
       "files": [
         {
           "path": "registry/wuhan/ui/dialog.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/dialog.tsx"
+          "type": "registry:ui"
         }
       ]
     },
@@ -1508,28 +1645,396 @@
       "name": "drawer",
       "type": "registry:ui",
       "dependencies": [
-        "vaul",
-        "@radix-ui/react-dialog"
+        "vaul"
       ],
       "files": [
         {
           "path": "registry/wuhan/ui/drawer.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/drawer.tsx"
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/dropdown-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/empty.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "label",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/field.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "form",
+      "type": "registry:ui"
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/hover-card.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/input.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "button",
+        "input",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/input-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "dependencies": [
+        "input-otp"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/input-otp.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "item",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/item.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/label.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/menubar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/navigation-menu.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/pagination.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/popover.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/radio-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "dependencies": [
+        "react-resizable-panels"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/resizable.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/scroll-area.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/select.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/separator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/sheet.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "button",
+        "separator",
+        "sheet",
+        "tooltip",
+        "input",
+        "use-mobile",
+        "skeleton"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/sidebar.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/skeleton.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/slider.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "sonner",
+      "type": "registry:ui",
+      "dependencies": [
+        "sonner",
+        "next-themes"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/sonner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/spinner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/switch.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/table.tsx",
+          "type": "registry:ui"
         }
       ]
     },
     {
       "name": "tabs",
       "type": "registry:ui",
-      "dependencies": [
-        "@radix-ui/react-tabs"
-      ],
       "files": [
         {
           "path": "registry/wuhan/ui/tabs.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/tabs.tsx"
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/textarea.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/toggle.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "registryDependencies": [
+        "toggle"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/ui/toggle-group.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/tooltip.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/kbd.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "registry/wuhan/ui/native-select.tsx",
+          "type": "registry:ui"
         }
       ]
     },
@@ -1865,7 +2370,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/welcome/welcome-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/welcome/welcome-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/welcome-demo.tsx"
         }
@@ -1879,7 +2384,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/message/message-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/message/message-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/message-demo.tsx"
         }
@@ -1893,7 +2398,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/message/message-default.tsx",
+          "path": "registry/wuhan/examples/blocks/message/message-default.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/message-default.tsx"
         }
@@ -1908,7 +2413,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/message/message-composed-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/message/message-composed-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/message-composed-demo.tsx"
         }
@@ -1923,7 +2428,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/message/message-with-status.tsx",
+          "path": "registry/wuhan/examples/blocks/message/message-with-status.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/message-with-status.tsx"
         }
@@ -1938,7 +2443,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/message/message-with-attachment.tsx",
+          "path": "registry/wuhan/examples/blocks/message/message-with-attachment.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/message-with-attachment.tsx"
         }
@@ -1953,7 +2458,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/message/message-with-feedback.tsx",
+          "path": "registry/wuhan/examples/blocks/message/message-with-feedback.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/message-with-feedback.tsx"
         }
@@ -1968,7 +2473,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/message/message-with-avatar-header.tsx",
+          "path": "registry/wuhan/examples/blocks/message/message-with-avatar-header.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/message-with-avatar-header.tsx"
         }
@@ -1982,7 +2487,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/attachment-list/attachment-list-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/attachment-list/attachment-list-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/attachment-list-demo.tsx"
         }
@@ -1996,7 +2501,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/quote-content/quote-content-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/quote-content/quote-content-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/quote-content-demo.tsx"
         }
@@ -2010,7 +2515,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/avatar-header/avatar-header-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/avatar-header/avatar-header-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/avatar-header-demo.tsx"
         }
@@ -2025,7 +2530,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/history-item/history-item-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/history-item/history-item-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/history-item-demo.tsx"
         }
@@ -2039,7 +2544,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/sender/sender-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/sender/sender-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/sender-demo.tsx"
         }
@@ -2053,7 +2558,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/sender/sender-default.tsx",
+          "path": "registry/wuhan/examples/blocks/sender/sender-default.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/sender-default.tsx"
         }
@@ -2067,7 +2572,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/sender/sender-active.tsx",
+          "path": "registry/wuhan/examples/blocks/sender/sender-active.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/sender-active.tsx"
         }
@@ -2081,7 +2586,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/sender/sender-disabled.tsx",
+          "path": "registry/wuhan/examples/blocks/sender/sender-disabled.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/sender-disabled.tsx"
         }
@@ -2096,7 +2601,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/sender/sender-composed-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/sender/sender-composed-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/sender-composed-demo.tsx"
         }
@@ -2110,7 +2615,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/textarea/textarea-demo.tsx",
+          "path": "registry/wuhan/examples/ui/textarea/textarea-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/textarea-demo.tsx"
         }
@@ -2124,9 +2629,779 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/button/button-demo.tsx",
+          "path": "registry/wuhan/examples/ui/button/button-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/button-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/input/input-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/input-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/label/label-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/label-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/badge/badge-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/badge-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/avatar/avatar-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/avatar-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/separator/separator-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/separator-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "skeleton"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/skeleton/skeleton-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/skeleton-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinner-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "spinner"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/spinner/spinner-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/spinner-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kbd-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "kbd"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/kbd/kbd-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/kbd-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "empty",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/empty/empty-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/empty-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "alert",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/alert/alert-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/alert-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "card",
+        "button",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/card/card-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/card-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "tabs",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/tabs/tabs-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/tabs-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "tooltip",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/tooltip/tooltip-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/tooltip-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "checkbox",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/checkbox/checkbox-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/checkbox-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "radio-group",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/radio-group/radio-group-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/radio-group-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "switch",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/switch/switch-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/switch-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "select"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/select/select-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/select-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "native-select-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "native-select"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/native-select/native-select-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/native-select-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-group-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "input-group",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/input-group/input-group-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/input-group-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-otp-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "input-otp"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/input-otp/input-otp-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/input-otp-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "field",
+        "input",
+        "button",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/field/field-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/field-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "slider"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/slider/slider-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/slider-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/progress/progress-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/progress-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "toggle"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/toggle/toggle-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/toggle-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle-group-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "toggle-group"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/toggle-group/toggle-group-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/toggle-group-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-group-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "button-group",
+        "button",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/button-group/button-group-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/button-group-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "collapsible",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/collapsible/collapsible-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/collapsible-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dialog",
+        "button",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/dialog/dialog-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dialog-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert-dialog-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "alert-dialog",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/alert-dialog/alert-dialog-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/alert-dialog-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "sheet",
+        "button",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/sheet/sheet-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/sheet-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drawer-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "drawer",
+        "button",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/drawer/drawer-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/drawer-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "popover",
+        "button",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/popover/popover-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/popover-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hover-card-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "hover-card",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/hover-card/hover-card-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/hover-card-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "dropdown-menu",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/dropdown-menu/dropdown-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/dropdown-menu-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "context-menu-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "context-menu"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/context-menu/context-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/context-menu-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "menubar-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "menubar"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/menubar/menubar-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/menubar-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "navigation-menu-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "navigation-menu"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/navigation-menu/navigation-menu-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/navigation-menu-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "command"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/command/command-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/command-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "combobox"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/combobox/combobox-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/combobox-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "breadcrumb"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/breadcrumb/breadcrumb-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/breadcrumb-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "pagination",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/pagination/pagination-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/pagination-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "accordion-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/accordion/accordion-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/accordion-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "table"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/table/table-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/table-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "carousel-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "carousel",
+        "button",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/carousel/carousel-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/carousel-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chart-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "chart",
+        "card"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/chart/chart-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/chart-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "calendar-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "calendar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/calendar/calendar-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/calendar-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "aspect-ratio"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/aspect-ratio/aspect-ratio-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/aspect-ratio-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "scroll-area",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/scroll-area/scroll-area-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/scroll-area-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resizable-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "resizable"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/resizable/resizable-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/resizable-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sonner-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "sonner",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/sonner/sonner-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/sonner-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "item-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "item",
+        "button",
+        "separator"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/item/item-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/item-demo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sidebar-demo",
+      "type": "registry:example",
+      "registryDependencies": [
+        "sidebar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/wuhan/examples/ui/sidebar/sidebar-demo.tsx",
+          "type": "registry:example",
+          "target": "components/wuhan/examples/sidebar-demo.tsx"
         }
       ]
     },
@@ -2139,7 +3414,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/prompt/prompt-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/prompt/prompt-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/prompt-demo.tsx"
         }
@@ -2153,7 +3428,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/prompt/prompt-horizontal.tsx",
+          "path": "registry/wuhan/examples/blocks/prompt/prompt-horizontal.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/prompt-horizontal.tsx"
         }
@@ -2167,7 +3442,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/prompt/prompt-vertical.tsx",
+          "path": "registry/wuhan/examples/blocks/prompt/prompt-vertical.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/prompt-vertical.tsx"
         }
@@ -2181,7 +3456,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/suggestion/suggestion-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/suggestion/suggestion-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/suggestion-demo.tsx"
         }
@@ -2195,7 +3470,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/suggestion/suggestion-default.tsx",
+          "path": "registry/wuhan/examples/blocks/suggestion/suggestion-default.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/suggestion-default.tsx"
         }
@@ -2209,7 +3484,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/suggestion/suggestion-custom-icon.tsx",
+          "path": "registry/wuhan/examples/blocks/suggestion/suggestion-custom-icon.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/suggestion-custom-icon.tsx"
         }
@@ -2223,7 +3498,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/quick-action/quick-action-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/quick-action/quick-action-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/quick-action-demo.tsx"
         }
@@ -2237,7 +3512,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/quick-action/quick-action-default.tsx",
+          "path": "registry/wuhan/examples/blocks/quick-action/quick-action-default.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/quick-action-default.tsx"
         }
@@ -2251,7 +3526,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/quick-action/quick-action-with-icons.tsx",
+          "path": "registry/wuhan/examples/blocks/quick-action/quick-action-with-icons.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/quick-action-with-icons.tsx"
         }
@@ -2265,7 +3540,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/quick-action/quick-action-single.tsx",
+          "path": "registry/wuhan/examples/blocks/quick-action/quick-action-single.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/quick-action-single.tsx"
         }
@@ -2279,7 +3554,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/quick-action/quick-action-interactive.tsx",
+          "path": "registry/wuhan/examples/blocks/quick-action/quick-action-interactive.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/quick-action-interactive.tsx"
         }
@@ -2293,7 +3568,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/quick-action/quick-action-disabled.tsx",
+          "path": "registry/wuhan/examples/blocks/quick-action/quick-action-disabled.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/quick-action-disabled.tsx"
         }
@@ -2307,7 +3582,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/quick-action/quick-action-flexible-layout.tsx",
+          "path": "registry/wuhan/examples/blocks/quick-action/quick-action-flexible-layout.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/quick-action-flexible-layout.tsx"
         }
@@ -2324,7 +3599,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/sidebar/sidebar-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/sidebar/sidebar-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/sidebar-demo.tsx"
         }
@@ -2338,7 +3613,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/feedback/feedback-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/feedback/feedback-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/feedback-demo.tsx"
         }
@@ -2352,7 +3627,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/toggle-button/toggle-button-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/toggle-button/toggle-button-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/toggle-button-demo.tsx"
         }
@@ -2366,7 +3641,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/deep-thinking/deep-thinking-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/deep-thinking/deep-thinking-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/deep-thinking-demo.tsx"
         }
@@ -2380,7 +3655,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/deep-thinking/deep-thinking-default.tsx",
+          "path": "registry/wuhan/examples/blocks/deep-thinking/deep-thinking-default.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/deep-thinking-default.tsx"
         }
@@ -2394,7 +3669,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/deep-thinking/deep-thinking-with-status.tsx",
+          "path": "registry/wuhan/examples/blocks/deep-thinking/deep-thinking-with-status.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/deep-thinking-with-status.tsx"
         }
@@ -2408,7 +3683,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/deep-thinking/deep-thinking-custom.tsx",
+          "path": "registry/wuhan/examples/blocks/deep-thinking/deep-thinking-custom.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/deep-thinking-custom.tsx"
         }
@@ -2422,7 +3697,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/component-panel/component-panel-default.tsx",
+          "path": "registry/wuhan/examples/blocks/component-panel/component-panel-default.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/component-panel-default.tsx"
         }
@@ -2437,7 +3712,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/tooltip/tooltip-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/tooltip/tooltip-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/tooltip-demo.tsx"
         }
@@ -2451,7 +3726,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/execution-result/execution-result-demo.tsx",
+          "path": "registry/wuhan/examples/blocks/execution-result/execution-result-demo.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/execution-result-demo.tsx"
         }
@@ -2465,7 +3740,7 @@
       ],
       "files": [
         {
-          "path": "registry/wuhan/examples/execution-result/execution-result-default.tsx",
+          "path": "registry/wuhan/examples/blocks/execution-result/execution-result-default.tsx",
           "type": "registry:example",
           "target": "components/wuhan/examples/execution-result-default.tsx"
         }

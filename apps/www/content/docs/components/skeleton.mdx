@@ -1,0 +1,53 @@
+---
+title: Skeleton
+description: A loading placeholder component that shows a shimmer effect.
+---
+
+<ComponentPreview name="skeleton-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/skeleton.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="skeleton" title="registry/wuhan/ui/skeleton.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Skeleton } from "@/registry/wuhan/ui/skeleton"
+```
+
+```tsx
+<Skeleton className="h-4 w-full" />
+```
+
+## Examples
+
+<ComponentPreview name="skeleton-demo" />
+

@@ -1,0 +1,63 @@
+---
+title: Resizable
+description: A component for creating resizable panels that can be adjusted by dragging.
+---
+
+<ComponentPreview name="resizable-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/resizable.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Install dependencies:</Step>
+
+```bash
+npm install react-resizable-panels
+```
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="resizable" title="registry/wuhan/ui/resizable.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/registry/wuhan/ui/resizable"
+```
+
+```tsx
+<ResizablePanelGroup direction="horizontal">
+  <ResizablePanel defaultSize={50}>Panel 1</ResizablePanel>
+  <ResizableHandle />
+  <ResizablePanel defaultSize={50}>Panel 2</ResizablePanel>
+</ResizablePanelGroup>
+```
+
+## Examples
+
+<ComponentPreview name="resizable-demo" />
+

@@ -1,0 +1,53 @@
+---
+title: Label
+description: A label component for form inputs with accessibility features.
+---
+
+<ComponentPreview name="label-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/label.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="label" title="registry/wuhan/ui/label.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Label } from "@/registry/wuhan/ui/label"
+```
+
+```tsx
+<Label htmlFor="email">Email</Label>
+```
+
+## Examples
+
+<ComponentPreview name="label-demo" />
+

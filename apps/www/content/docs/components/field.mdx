@@ -1,0 +1,59 @@
+---
+title: Field
+description: A form field component for grouping labels, inputs, and descriptions.
+---
+
+<ComponentPreview name="field-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/field.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="field" title="registry/wuhan/ui/field.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { Field, FieldLabel, FieldDescription, FieldGroup } from "@/registry/wuhan/ui/field"
+```
+
+```tsx
+<FieldGroup>
+  <Field>
+    <FieldLabel htmlFor="email">Email</FieldLabel>
+    <Input id="email" />
+    <FieldDescription>Enter your email</FieldDescription>
+  </Field>
+</FieldGroup>
+```
+
+## Examples
+
+<ComponentPreview name="field-demo" />
+

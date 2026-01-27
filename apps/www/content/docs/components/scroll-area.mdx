@@ -1,0 +1,55 @@
+---
+title: Scroll Area
+description: A component for creating custom scrollable areas with styled scrollbars.
+---
+
+<ComponentPreview name="scroll-area-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/scroll-area.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="scroll-area" title="registry/wuhan/ui/scroll-area.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ScrollArea } from "@/registry/wuhan/ui/scroll-area"
+```
+
+```tsx
+<ScrollArea className="h-72 w-48 rounded-md border">
+  <div className="p-4">Content</div>
+</ScrollArea>
+```
+
+## Examples
+
+<ComponentPreview name="scroll-area-demo" />
+

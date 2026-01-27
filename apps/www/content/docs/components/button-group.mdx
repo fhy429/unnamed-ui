@@ -1,0 +1,56 @@
+---
+title: Button Group
+description: A group of buttons displayed together with shared styling.
+---
+
+<ComponentPreview name="button-group-demo" />
+
+## Installation
+
+<CodeTabs>
+
+<TabsList>
+  <TabsTrigger value="cli">Command</TabsTrigger>
+  <TabsTrigger value="manual">Manual</TabsTrigger>
+</TabsList>
+<TabsContent value="cli">
+
+```bash
+npx shadcn@latest add http://localhost:3000/r/wuhan/button-group.json
+```
+
+</TabsContent>
+
+<TabsContent value="manual">
+
+<Steps className="mb-0 pt-2">
+
+<Step>Copy and paste the following code into your project.</Step>
+
+<ComponentSource name="button-group" title="registry/wuhan/ui/button-group.tsx" />
+
+<Step>Update the import paths to match your project setup.</Step>
+
+</Steps>
+
+</TabsContent>
+
+</CodeTabs>
+
+## Usage
+
+```tsx
+import { ButtonGroup } from "@/registry/wuhan/ui/button-group"
+```
+
+```tsx
+<ButtonGroup>
+  <Button>One</Button>
+  <Button>Two</Button>
+</ButtonGroup>
+```
+
+## Examples
+
+<ComponentPreview name="button-group-demo" />
+
