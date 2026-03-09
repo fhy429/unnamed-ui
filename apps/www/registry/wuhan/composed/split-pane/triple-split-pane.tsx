@@ -7,6 +7,7 @@ import {
   SplitPaneItemPrimitive,
   // SplitPaneSeparatorPrimitive,
 } from "@/registry/wuhan/blocks/split-pane/split-pane-01";
+import { cn } from "@/lib/utils";
 import {
   Popover,
   PopoverContent,
@@ -31,8 +32,12 @@ export interface PopoverConfig {
 export interface PanelConfig {
   /** 面板内容 */
   children?: React.ReactNode;
+  /** 紧凑模式下显示的内容（收起时替代 children），可为函数接收 expand 回调 */
+  compactChildren?: React.ReactNode | ((expand: () => void) => React.ReactNode);
   /** 面板标题 */
   title?: React.ReactNode;
+  /** 头部右侧操作区内容 */
+  headerAction?: React.ReactNode;
   /** 头部居中内容（仅中间面板支持） */
   centerHeaderContent?: React.ReactNode;
   /** 展开时的宽度（像素或百分比字符串，如 "300px" 或 "20%" ）*/
@@ -43,6 +48,8 @@ export interface PanelConfig {
   collapsedWidth?: string;
   /** 折叠图标 */
   collapsibleIcon?: React.ReactNode;
+  /** 是否显示默认折叠图标 */
+  showCollapsibleIcon?: boolean;
   /** 紧凑模式下是否显示折叠图标 */
   showIconWhenCompact?: boolean;
   /** 初始是否折叠 */
@@ -136,10 +143,12 @@ export const TripleSplitPane = React.forwardRef<
     const {
       children: leftChildren,
       title: leftTitle,
+      headerAction: leftHeaderAction,
       width: leftWidth = "300px",
       minWidth: leftMinWidth = "200px",
       collapsedWidth: leftCollapsedWidth = "0px",
       collapsibleIcon: leftCollapsibleIcon,
+      showCollapsibleIcon: leftShowCollapsibleIcon = true,
       showIconWhenCompact: leftShowIconWhenCompact = true,
       defaultCollapsed: leftDefaultCollapsed = false,
       classNames: leftClassNames,
@@ -164,11 +173,14 @@ export const TripleSplitPane = React.forwardRef<
 
     const {
       children: rightChildren,
+      compactChildren: rightCompactChildren,
       title: rightTitle,
+      headerAction: rightHeaderAction,
       width: rightWidth = "300px",
       minWidth: rightMinWidth = "200px",
       collapsedWidth: rightCollapsedWidth = "0px",
       collapsibleIcon: rightCollapsibleIcon,
+      showCollapsibleIcon: rightShowCollapsibleIcon = true,
       showIconWhenCompact: rightShowIconWhenCompact = true,
       defaultCollapsed: rightDefaultCollapsed = false,
       classNames: rightClassNames,
@@ -375,9 +387,11 @@ export const TripleSplitPane = React.forwardRef<
           isCompact={isLeftCompact}
           showIconWhenCompact={leftShowIconWhenCompact}
           panelTitle={leftTitle}
+          headerAction={leftHeaderAction}
           collapsibleIcon={
             leftCollapsibleIcon || <PanelLeft className="h-4 w-4" />
           }
+          showCollapsibleIcon={leftShowCollapsibleIcon}
           onCollapsibleClick={toggleLeftPanel}
           containerClassName={leftClassNames?.container}
           headerClassName={leftClassNames?.header}
@@ -421,14 +435,25 @@ export const TripleSplitPane = React.forwardRef<
           isCompact={isRightCompact}
           showIconWhenCompact={rightShowIconWhenCompact}
           panelTitle={rightTitle}
+          headerAction={rightHeaderAction}
           collapsibleIcon={
             rightCollapsibleIcon || <PanelRight className="h-4 w-4" />
           }
+          showCollapsibleIcon={rightShowCollapsibleIcon}
           onCollapsibleClick={toggleRightPanel}
           containerClassName={rightClassNames?.container}
-          headerClassName={rightClassNames?.header}
+          headerClassName={cn(
+            rightClassNames?.header,
+            isRightCompact &&
+              "!px-0 !justify-center [&>*:not(:last-child)]:!hidden",
+          )}
           bodyClassName={rightClassNames?.body}
           contentClassName={rightClassNames?.content}
+          compactContent={
+            typeof rightCompactChildren === "function"
+              ? rightCompactChildren(() => setIsRightCollapsed(false))
+              : rightCompactChildren
+          }
         >
           {rightChildren}
         </SplitPaneItemPrimitive>

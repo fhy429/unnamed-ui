@@ -25,6 +25,8 @@ SplitPaneContainerPrimitive.displayName = "SplitPaneContainerPrimitive";
 export interface SplitPaneItemPrimitiveProps extends React.HTMLAttributes<HTMLDivElement> {
   /** 面板标题 */
   panelTitle?: React.ReactNode;
+  /** 头部右侧自定义操作区 */
+  headerAction?: React.ReactNode;
   /** 头部居中内容（绝对定位在头部中心） */
   centerHeaderContent?: React.ReactNode;
   /** 折叠图标，默认使用 PanelLeft */
@@ -47,6 +49,8 @@ export interface SplitPaneItemPrimitiveProps extends React.HTMLAttributes<HTMLDi
   showIconWhenCompact?: boolean;
   /** 面板宽度 */
   width?: string | number;
+  /** 紧凑模式下显示的内容（收起时替代 children） */
+  compactContent?: React.ReactNode;
 }
 
 export const SplitPaneItemPrimitive = React.forwardRef<
@@ -56,6 +60,7 @@ export const SplitPaneItemPrimitive = React.forwardRef<
   (
     {
       panelTitle,
+      headerAction,
       centerHeaderContent,
       collapsibleIcon,
       showCollapsibleIcon = true,
@@ -68,6 +73,7 @@ export const SplitPaneItemPrimitive = React.forwardRef<
       isCompact = false,
       showIconWhenCompact = true,
       width,
+      compactContent,
       style,
       ...props
     },
@@ -160,6 +166,8 @@ export const SplitPaneItemPrimitive = React.forwardRef<
                 {/* 占位符，将折叠图标推到右侧 */}
                 <div className="flex-1" />
 
+                {headerAction}
+
                 {/* 折叠图标 */}
                 {showCollapsibleIcon && (!isCompact || showIconWhenCompact) && (
                   <IconButtonPrimitive
@@ -176,11 +184,20 @@ export const SplitPaneItemPrimitive = React.forwardRef<
           </div>
 
           {/* Body 部分 - 滚动容器无 padding 使滚动条贴边，内容层保留 padding */}
-          {!isCompact && (
+          {isCompact && compactContent ? (
+            <div
+              className={cn(
+                "flex-1 overflow-auto min-h-0 flex flex-col gap-3 py-2 px-1",
+                bodyClassName,
+              )}
+            >
+              {compactContent}
+            </div>
+          ) : !isCompact ? (
             <div className={cn("flex-1 overflow-auto min-h-0", bodyClassName)}>
               <div className={cn("p-4", contentClassName)}>{children}</div>
             </div>
-          )}
+          ) : null}
         </div>
       </div>
     );

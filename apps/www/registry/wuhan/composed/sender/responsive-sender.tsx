@@ -284,8 +284,7 @@ function ResponsiveSenderInner<TAttachment = Attachment>(
     buttonGroupChildren,
   } = props;
 
-  const resolvedFixedMode =
-    inputMode === "responsive" ? undefined : inputMode;
+  const resolvedFixedMode = inputMode === "responsive" ? undefined : inputMode;
   const [isOverflow, setIsOverflow] = React.useState(
     inputMode === "multi" ? true : inputMode === "single" ? false : false,
   );

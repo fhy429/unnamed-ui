@@ -13,6 +13,14 @@ import { MoreHorizontal, Trash2, Pencil, Copy } from "lucide-react";
 
 // ==================== 类型定义 ====================
 
+/** 报告详情数据（用于预览） */
+export interface ReportCardReportData {
+  /** 论文分析（markdown） */
+  analysis?: string;
+  /** 场景分析（markdown） */
+  scenario_analysis?: string;
+}
+
 /**
  * Report Card Item 类型
  * @public
@@ -20,16 +28,28 @@ import { MoreHorizontal, Trash2, Pencil, Copy } from "lucide-react";
 export interface ReportCardItem {
   /** 唯一标识符 */
   id: string;
-  /** 卡片标题 */
+  /** 卡片标题（论文标题） */
   title: string;
-  /** 描述文本 */
+  /** 描述文本（作者 · 时间） */
   description?: string;
+  /** 作者 */
+  authors?: string;
+  /** 日期（published 格式化） */
+  date?: string;
   /** 自定义图标 */
   icon?: React.ReactNode;
   /** 是否选中 */
   selected?: boolean;
   /** 是否禁用 */
   disabled?: boolean;
+  /** 报告详情（预览用） */
+  reportData?: ReportCardReportData;
+  /** Agent id（1-4：音频、PPT、博客、报告），用于区分类型和展示对应图标 */
+  agentId?: string;
+  /** Agent 标题，用于展示类型标签 */
+  agentTitle?: string;
+  /** 颜色索引，对应 CARD_STYLES，用于区分类型背景色 */
+  colorIndex?: number;
 }
 
 /**
@@ -41,8 +61,12 @@ export interface ReportCardProps {
   id?: string;
   /** 标题 */
   title?: string;
-  /** 描述文本 */
+  /** 描述文本（有 authors/date 时优先用） */
   description?: React.ReactNode;
+  /** 作者（超出省略号） */
+  authors?: string;
+  /** 日期（完整显示） */
+  date?: string;
   /** 图标 */
   icon?: React.ReactNode;
   /** 宽度 */
@@ -61,6 +85,8 @@ export interface ReportCardProps {
   onDelete?: () => void;
   /** 复制回调 */
   onDuplicate?: () => void;
+  /** 点击卡片回调（预览） */
+  onClick?: () => void;
   /** 自定义右侧操作区域（完全自定义） */
   action?: React.ReactNode;
   /** 是否显示默认操作按钮（仅 action 未提供时生效） */
@@ -88,6 +114,8 @@ export interface ReportCardListProps {
   onDelete?: (id: string) => void;
   /** 复制回调 */
   onDuplicate?: (id: string) => void;
+  /** 点击卡片回调（预览） */
+  onCardClick?: (card: ReportCardItem) => void;
   /** 自定义单个卡片右侧操作区域 */
   cardAction?: (item: ReportCardItem) => React.ReactNode;
   /** 是否显示默认操作按钮 */
@@ -98,6 +126,10 @@ export interface ReportCardListProps {
   listClassName?: string;
   /** 卡片宽度 */
   cardWidth?: string | number;
+  /** 根据卡片获取自定义容器类名（如类型背景色） */
+  getCardClassName?: (card: ReportCardItem) => string | undefined;
+  /** 根据卡片获取自定义图标（如类型图标） */
+  getCardIcon?: (card: ReportCardItem) => React.ReactNode | undefined;
 }
 
 // ==================== 操作菜单内容 ====================
@@ -121,6 +153,7 @@ const CardActionsMenu = ({
         "shadow-[var(--shadow-basic)]",
         "p-[var(--Padding-padding-com-xs)]",
       )}
+      onClick={(e) => e.stopPropagation()}
     >
       <div className="flex flex-col">
         {onEdit && (
@@ -128,7 +161,10 @@ const CardActionsMenu = ({
             variant="unstyled"
             size="unstyled"
             type="button"
-            onClick={onEdit}
+            onClick={(e) => {
+              e.stopPropagation();
+              onEdit?.();
+            }}
             className={cn(
               "flex items-center justify-start gap-[var(--Gap-gap-md)]",
               "w-full",
@@ -151,7 +187,10 @@ const CardActionsMenu = ({
             variant="unstyled"
             size="unstyled"
             type="button"
-            onClick={onDuplicate}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDuplicate?.();
+            }}
             className={cn(
               "flex items-center justify-start gap-[var(--Gap-gap-md)]",
               "w-full",
@@ -174,7 +213,10 @@ const CardActionsMenu = ({
             variant="unstyled"
             size="unstyled"
             type="button"
-            onClick={onDelete}
+            onClick={(e) => {
+              e.stopPropagation();
+              onDelete?.();
+            }}
             className={cn(
               "flex items-center justify-start gap-[var(--Gap-gap-md)]",
               "w-full",
@@ -221,6 +263,8 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
       id,
       title,
       description,
+      authors,
+      date,
       icon,
       width = "280px",
       showCheckbox = false,
@@ -230,6 +274,7 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
       onEdit,
       onDelete,
       onDuplicate,
+      onClick,
       action,
       showAction = true,
       className,
@@ -256,12 +301,15 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
         disabled={disabled}
         className={cn("group/report-card", className)}
         style={{ width }}
+        onClick={onClick}
       >
         {/* 左侧：复选框 + 图标 + 标题 + 描述 */}
         <ReportCardHeaderPrimitive
           icon={icon ?? <ReportCardDefaultIcon />}
           title={title}
           description={description}
+          authors={authors}
+          date={date}
           showCheckbox={showCheckbox}
           selected={selected}
           disabled={disabled}
@@ -270,14 +318,13 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
 
         {/* 右侧：自定义操作区域 或 默认操作按钮 */}
         {action ? (
-          // 用户自定义操作区域
           <div onClick={(e) => e.stopPropagation()}>{action}</div>
         ) : showDefaultAction ? (
-          // 默认操作按钮（与 file-card 一致：默认隐藏，hover 卡片时显示，点击打开菜单）
           <Popover.Root open={open} onOpenChange={setOpen}>
             <Popover.Trigger asChild>
               <div
                 role="button"
+                onClick={(e) => e.stopPropagation()}
                 tabIndex={disabled ? -1 : 0}
                 aria-label="更多操作"
                 aria-disabled={disabled}
@@ -288,17 +335,12 @@ export const ReportCard = React.forwardRef<HTMLDivElement, ReportCardProps>(
                   "p-[var(--Gap-gap-xs)]",
                   "transition-all duration-200",
                   "flex-shrink-0",
-                  // 默认隐藏，hover 卡片时显示（此时无底色）
                   "opacity-0",
                   "group-hover/report-card:opacity-100",
-                  // popover 展开时 icon 保持显示且保持底色
                   open && "opacity-100",
                   open && "bg-[var(--Container-bg-neutral-light-hover)]",
-                  // 仅 hover icon 时底色变化
                   "hover:bg-[var(--Container-bg-neutral-light-hover)]",
-                  // 禁用状态
                   disabled && "cursor-not-allowed opacity-50",
-                  // 焦点状态（非禁用）
                   !disabled &&
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)]",
                   "cursor-pointer",
@@ -342,16 +384,6 @@ ReportCard.displayName = "ReportCard";
  * ReportCardList 组件
  * 展示多个报告卡片列表
  *
- * @example
- * ```tsx
- * const cards = [
- *   { id: "1", title: "候选人评估报告", description: "更新时间：08-04" },
- *   { id: "2", title: "数据分析报告", description: "包含本月统计" },
- * ];
- *
- * <ReportCardList title="我的报告" cards={cards} onDelete={(id) => {...}} />
- * ```
- *
  * @public
  */
 export const ReportCardList = React.forwardRef<
@@ -365,14 +397,16 @@ export const ReportCardList = React.forwardRef<
     onEdit,
     onDelete,
     onDuplicate,
+    onCardClick,
     cardAction,
     showCardAction,
+    getCardClassName,
+    getCardIcon,
     className,
     listClassName,
     cardWidth,
   } = props;
 
-  // 处理选中变化
   const handleSelectChange = React.useCallback(
     (selected: boolean, id?: string) => {
       onSelectChange?.(selected, id ?? "");
@@ -382,20 +416,6 @@ export const ReportCardList = React.forwardRef<
 
   return (
     <div ref={ref} className={className}>
-      {/* {title && (
-        <div
-          className={cn(
-            "font-[var(--font-family-CN)]",
-            "font-[var(--font-weight-600)]",
-            "font-size-2",
-            "leading-[var(--line-height-2)]",
-            "text-[var(--Text-text-primary)]",
-            "mb-[var(--Margin-margin-com-md)]",
-          )}
-        >
-          {title}
-        </div>
-      )} */}
       <div
         className={cn("flex flex-col gap-[var(--Gap-gap-md)]", listClassName)}
       >
@@ -405,17 +425,21 @@ export const ReportCardList = React.forwardRef<
             id={card.id}
             title={card.title}
             description={card.description}
-            icon={card.icon}
+            authors={card.authors}
+            date={card.date}
+            icon={getCardIcon?.(card) ?? card.icon}
             showCheckbox={showCheckbox}
             selected={card.selected}
             disabled={card.disabled}
             action={cardAction?.(card)}
             showAction={showCardAction}
+            onClick={onCardClick ? () => onCardClick(card) : undefined}
             onSelectChange={handleSelectChange}
             onEdit={onEdit ? () => onEdit(card.id) : undefined}
             onDelete={onDelete ? () => onDelete(card.id) : undefined}
             onDuplicate={onDuplicate ? () => onDuplicate(card.id) : undefined}
             width={cardWidth}
+            className={cn(getCardClassName?.(card))}
           />
         ))}
       </div>

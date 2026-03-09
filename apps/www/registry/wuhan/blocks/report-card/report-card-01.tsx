@@ -6,6 +6,7 @@ import {
   CheckboxRootPrimitive,
   CheckboxIndicatorPrimitive,
 } from "@/registry/wuhan/blocks/checkbox/checkbox-01";
+import { Tooltip } from "@/registry/wuhan/composed/tooltip/tooltip";
 
 // ==================== 类型定义 ====================
 
@@ -30,8 +31,12 @@ interface ReportCardHeaderPrimitiveProps {
   title?: React.ReactNode;
   /** 图标 */
   icon?: React.ReactNode;
-  /** 描述文本 */
+  /** 描述文本（作者 · 时间 时使用 authors 和 date 更佳） */
   description?: React.ReactNode;
+  /** 作者（超出省略号） */
+  authors?: string;
+  /** 日期（完整显示） */
+  date?: string;
   /** 是否显示复选框 */
   showCheckbox?: boolean;
   /** 选中状态 */
@@ -98,11 +103,12 @@ export const ReportCardContainerPrimitive = React.forwardRef<
       aria-selected={selected}
       aria-disabled={disabled}
       className={cn(
-        "w-full",
+        "w-full min-w-0",
         "flex flex-row",
         "items-center",
         "justify-between",
         "gap-[var(--Gap-gap-lg)]",
+        "overflow-hidden",
         "p-[var(--Padding-padding-com-lg)]",
         "rounded-[var(--radius-xl)]",
         "bg-[var(--Container-bg-container)]",
@@ -123,12 +129,9 @@ export const ReportCardContainerPrimitive = React.forwardRef<
       onClick={handleClick}
       tabIndex={disabled ? -1 : 0}
       onKeyDown={(e) => {
-        // 禁用状态下不响应键盘事件
         if (disabled) return;
-        // 支持 Enter 和 Space 触发行点击
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          // 触发父容器的点击事件
           e.currentTarget.click();
         }
       }}
@@ -153,6 +156,8 @@ export const ReportCardHeaderPrimitive = React.forwardRef<
       title,
       icon,
       description,
+      authors,
+      date,
       showCheckbox,
       selected = false,
       disabled = false,
@@ -201,55 +206,108 @@ export const ReportCardHeaderPrimitive = React.forwardRef<
           </div>
         )}
 
-        <div className="flex flex-col gap-[var(--Gap-gap-xs)]">
+        <div className="flex flex-col gap-[var(--Gap-gap-xs)] min-w-0 overflow-hidden">
           {/* 图标 + 标题（水平排列） */}
           <div className="flex items-center gap-[var(--Gap-gap-md)] min-w-0 overflow-hidden">
             {/* 图标 */}
             {icon && (
-              <span className="text-[var(--Text-text-brand)] flex-shrink-0">
+              <span className="flex-shrink-0 [&_svg]:size-4">
                 {React.isValidElement(icon)
                   ? React.cloneElement(
                       icon as React.ReactElement<{ size?: number }>,
-                      {
-                        size: 16,
-                      },
+                      { size: 16 },
                     )
                   : icon}
               </span>
             )}
+            {/* 标题区 */}
+            <div className="flex flex-col gap-[var(--Gap-gap-xs)] min-w-0 overflow-hidden">
+              {title && (
+                <Tooltip
+                  content={title}
+                  side="top"
+                  align="start"
+                  contentClassName="text-left"
+                >
+                  <span
+                    className={cn(
+                      "font-[var(--font-family-EN)]",
+                      "font-[var(--font-weight-400)]",
+                      "font-size-2",
+                      "leading-[var(--line-height-2)]",
+                      "text-[var(--Text-text-primary)]",
+                      "truncate min-w-0",
+                      "[overflow-wrap:anywhere]",
+                    )}
+                  >
+                    {title}
+                  </span>
+                </Tooltip>
+              )}
+            </div>
+          </div>
 
-            {/* 标题 */}
-            {title && (
+          {/* 描述：作者（省略号）+ 日期（完整）或纯 description */}
+          {authors != null || date != null ? (
+            <div className="flex items-center gap-1 min-w-0 overflow-hidden">
+              {authors != null && (
+                <Tooltip
+                  content={authors}
+                  side="top"
+                  align="start"
+                  contentClassName="text-left"
+                >
+                  <span
+                    className={cn(
+                      "font-[var(--font-family-CN)]",
+                      "font-[var(--font-weight-400)]",
+                      "font-size-1",
+                      "leading-[var(--line-height-1)]",
+                      "text-[var(--Text-text-tertiary)]",
+                      "truncate min-w-0",
+                      "[overflow-wrap:anywhere]",
+                    )}
+                  >
+                    {authors}
+                  </span>
+                </Tooltip>
+              )}
+              {date != null && (
+                <span
+                  className={cn(
+                    "font-[var(--font-family-CN)]",
+                    "font-[var(--font-weight-400)]",
+                    "font-size-1",
+                    "leading-[var(--line-height-1)]",
+                    "text-[var(--Text-text-tertiary)]",
+                    "flex-shrink-0",
+                  )}
+                >
+                  {authors != null ? ` · ${date}` : date}
+                </span>
+              )}
+            </div>
+          ) : description ? (
+            <Tooltip
+              content={description}
+              side="top"
+              align="start"
+              contentClassName="text-left"
+            >
               <span
                 className={cn(
-                  "font-[var(--font-family-EN)]",
+                  "font-[var(--font-family-CN)]",
                   "font-[var(--font-weight-400)]",
-                  "font-size-2",
-                  "leading-[var(--line-height-2)]",
-                  "text-[var(--Text-text-primary)]",
+                  "font-size-1",
+                  "leading-[var(--line-height-1)]",
+                  "text-[var(--Text-text-tertiary)]",
                   "truncate",
                 )}
               >
-                {title}
+                {description}
               </span>
-            )}
-          </div>
-
-          {/* 描述 */}
-          {description && (
-            <span
-              className={cn(
-                "font-[var(--font-family-CN)]",
-                "font-[var(--font-weight-400)]",
-                "font-size-1",
-                "leading-[var(--line-height-1)]",
-                "text-[var(--Text-text-tertiary)]",
-                "truncate",
-              )}
-            >
-              {description}
-            </span>
-          )}
+            </Tooltip>
+          ) : null}
         </div>
       </div>
     );
