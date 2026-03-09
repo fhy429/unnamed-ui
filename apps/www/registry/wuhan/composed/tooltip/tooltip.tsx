@@ -5,7 +5,6 @@ import {
   BlockTooltip,
   BlockTooltipTrigger,
   BlockTooltipContent,
-  type BlockTooltipContentProps,
 } from "@/registry/wuhan/blocks/tooltip/tooltip-01";
 
 // ==================== 类型定义 ====================
@@ -95,7 +94,7 @@ export const Tooltip = React.forwardRef<HTMLDivElement, TooltipProps>(
       sideOffset = 4,
       align = "center",
       contentClassName,
-      delayDuration = 0,
+      delayDuration: _delayDuration = 0,
     },
     ref,
   ) => {

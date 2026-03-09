@@ -26,6 +26,13 @@ export interface ResponsiveTextareaProps extends React.ComponentProps<
   isOverflow?: boolean | null; // null = 未传入，使用内部状态
   /** 当检测到溢出状态变化时回调 */
   onOverflowChange?: (isOverflow: boolean) => void;
+  /**
+   * 固定模式：单行 / 多行，不随内容自适应
+   * - "single": 固定单行
+   * - "multi": 固定多行（2-5 行）
+   * - undefined: 响应式（默认，根据内容自动切换）
+   */
+  fixedMode?: "single" | "multi";
 }
 
 export interface ResponsiveButtonGroupProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -141,7 +148,63 @@ const MAX_LINES = 5;
 export const ResponsiveTextarea = React.forwardRef<
   HTMLTextAreaElement,
   ResponsiveTextareaProps
->(({ isOverflow, onOverflowChange, className, ...props }, ref) => {
+>(({ isOverflow, onOverflowChange, fixedMode, className, ...props }, ref) => {
+  // 固定模式：通知父组件布局
+  React.useEffect(() => {
+    if (fixedMode === "single") onOverflowChange?.(false);
+    else if (fixedMode === "multi") onOverflowChange?.(true);
+  }, [fixedMode, onOverflowChange]);
+
+  // 固定模式：单行
+  if (fixedMode === "single") {
+    return (
+      <Textarea
+        ref={ref}
+        className={cn(
+          "p-1 border !border-[transparent] rounded resize-none",
+          "shadow-none focus-visible:ring-0",
+          "text-sm",
+          "caret-[var(--primary)]",
+          "flex-1 min-w-0",
+          className,
+        )}
+        placeholder={props.placeholder ?? "输入内容..."}
+        rows={1}
+        style={{
+          minHeight: `${SINGLE_LINE_MIN_HEIGHT}px`,
+          height: `${SINGLE_LINE_MIN_HEIGHT}px`,
+          maxHeight: `${SINGLE_LINE_MIN_HEIGHT}px`,
+          overflowY: "hidden",
+        }}
+        {...props}
+      />
+    );
+  }
+  // 固定模式：多行
+  if (fixedMode === "multi") {
+    return (
+      <Textarea
+        ref={ref}
+        className={cn(
+          "p-1 border !border-[transparent] rounded resize-none",
+          "shadow-none focus-visible:ring-0",
+          "text-sm",
+          "caret-[var(--primary)]",
+          "w-full",
+          className,
+        )}
+        placeholder={props.placeholder ?? "输入内容..."}
+        rows={2}
+        style={{
+          minHeight: "calc(var(--line-height-2) * 2)",
+          maxHeight: "calc(var(--line-height-2) * 5)",
+          overflowY: "auto",
+        }}
+        {...props}
+      />
+    );
+  }
+
   const localRef = React.useRef<HTMLTextAreaElement>(null);
   const setRef = React.useCallback(
     (el: HTMLTextAreaElement | null) => {
@@ -419,6 +482,8 @@ export const ResponsiveSendButton = React.forwardRef<
         className={cn(
           "w-8 h-8 rounded-full p-2 gap-2",
           "bg-[var(--Container-bg-brand)]",
+          "hover:bg-[var(--Container-bg-brand-hover)]",
+          "active:bg-[var(--Container-bg-brand-active)]",
           "text-[var(--Text-text-inverse)]",
           "transition-opacity",
           disabled && "opacity-80",

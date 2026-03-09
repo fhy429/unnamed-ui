@@ -8,15 +8,12 @@ import {
   SenderResponsiveButtonGroup,
   SenderResponsiveAttachmentButton,
   SenderResponsiveSendButton,
-  type ResponsiveTextareaProps,
-  type ResponsiveButtonGroupProps,
 } from "@/registry/wuhan/blocks/sender/sender-responsive-01";
 import {
   AttachmentListComposed,
   type AttachmentItem,
 } from "@/registry/wuhan/composed/attachment-list/attachment-list";
 import { Paperclip, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 /**
  * @public
@@ -204,6 +201,13 @@ export interface ResponsiveSenderProps<TAttachment = Attachment> {
   className?: string;
   maxWidth?: string;
   forceSingleLine?: boolean;
+  /**
+   * 输入框模式
+   * - "single": 固定单行
+   * - "multi": 固定多行（2-5 行）
+   * - "responsive": 响应式（默认，根据内容自动切换单行/多行）
+   */
+  inputMode?: "single" | "multi" | "responsive";
   onOverflowChange?: (isOverflow: boolean) => void;
   renderActionBar?: (
     context: ResponsiveSenderActionRenderContext<TAttachment>,
@@ -273,13 +277,18 @@ function ResponsiveSenderInner<TAttachment = Attachment>(
     className,
     maxWidth = "100%",
     forceSingleLine = false,
+    inputMode = "responsive",
     onOverflowChange,
     renderActionBar,
     renderActions,
     buttonGroupChildren,
   } = props;
 
-  const [isOverflow, setIsOverflow] = React.useState(false);
+  const resolvedFixedMode =
+    inputMode === "responsive" ? undefined : inputMode;
+  const [isOverflow, setIsOverflow] = React.useState(
+    inputMode === "multi" ? true : inputMode === "single" ? false : false,
+  );
 
   const resolvedAttachmentAdapter =
     (attachmentAdapter as AttachmentAdapter<TAttachment>) ??
@@ -427,6 +436,7 @@ function ResponsiveSenderInner<TAttachment = Attachment>(
             onKeyDown={handleInputKeyDown}
             isOverflow={isOverflow}
             onOverflowChange={handleOverflowChange}
+            fixedMode={resolvedFixedMode}
           />
         )}
 
