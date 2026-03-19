@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 export interface TokenEntry {
@@ -13,6 +13,7 @@ export interface TokenCategory {
   tokens: TokenEntry[];
 }
 
+// 与 `apps/www/registry/wuhan/style/globals.css` 对齐的分类规则。
 const CATEGORY_MAP: Record<string, { pattern: RegExp; description: string }> = {
   "Color Primitives - Light": {
     pattern: /^--Light-/,
@@ -96,6 +97,15 @@ const CATEGORY_MAP: Record<string, { pattern: RegExp; description: string }> = {
   },
 };
 
+// 以文件路径 + mtime 做缓存，避免重复全量解析。
+const TOKEN_CACHE = new Map<
+  string,
+  { mtimeMs: number; categories: TokenCategory[] }
+>();
+
+/**
+ * 根据 token 变量名推断语义分类。
+ */
 function categorize(name: string): string {
   for (const [category, { pattern }] of Object.entries(CATEGORY_MAP)) {
     if (pattern.test(name)) return category;
@@ -103,11 +113,21 @@ function categorize(name: string): string {
   return "Other";
 }
 
+/**
+ * 解析 globals.css 中的 CSS 变量，并按分类聚合。
+ */
 export function parseTokens(componentRoot: string): TokenCategory[] {
   const cssPath = join(componentRoot, "style", "globals.css");
+  const stats = statSync(cssPath);
+  const cached = TOKEN_CACHE.get(cssPath);
+  if (cached && cached.mtimeMs === stats.mtimeMs) {
+    return cached.categories;
+  }
+
   const content = readFileSync(cssPath, "utf-8");
 
   const tokenMap = new Map<string, TokenEntry[]>();
+  // 匹配形如 `--Text-text-primary: #111;` 的变量声明。
   const varRegex = /^\s*(--[\w-]+)\s*:\s*(.+?)\s*;/gm;
 
   let match: RegExpExecArray | null;
@@ -122,6 +142,7 @@ export function parseTokens(componentRoot: string): TokenCategory[] {
     tokenMap.get(category)!.push({ name, value, category });
   }
 
+  // 按预定义分类顺序输出，保证结果稳定。
   const categories: TokenCategory[] = [];
   for (const [catName, meta] of Object.entries(CATEGORY_MAP)) {
     const tokens = tokenMap.get(catName);
@@ -143,6 +164,7 @@ export function parseTokens(componentRoot: string): TokenCategory[] {
     });
   }
 
+  TOKEN_CACHE.set(cssPath, { mtimeMs: stats.mtimeMs, categories });
   return categories;
 }
 
@@ -161,6 +183,9 @@ export function getTokensByCategory(
   );
 }
 
+/**
+ * 将 token 分类渲染成 MCP 友好的纯文本输出。
+ */
 export function formatTokensAsText(categories: TokenCategory[]): string {
   const lines: string[] = [];
   for (const cat of categories) {
