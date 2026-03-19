@@ -1,5 +1,5 @@
-import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { readFileSync, existsSync } from "node:fs";
+import { join } from "node:path";
 
 export interface ComponentMeta {
   name: string;
@@ -13,8 +13,11 @@ export interface ComponentMeta {
 }
 
 /**
- * Extract a quoted string value for a given field from a code block.
- * Handles single-line and next-line patterns, including string concatenation.
+ * 从 registry 对象块中提取字符串字段。
+ * 支持：
+ * - `field: "value"`
+ * - `field:\n  "value"`
+ * - 简单拼接，如 `"a" + "b"`
  */
 function extractStringField(block: string, field: string): string {
   const re = new RegExp(
@@ -26,7 +29,7 @@ function extractStringField(block: string, field: string): string {
 }
 
 /**
- * Extract a string array field like `dependencies: ["a", "b"]`
+ * 提取字符串数组字段，如 `dependencies: ["a", "b"]`。
  */
 function extractArrayField(block: string, field: string): string[] {
   const re = new RegExp(`${field}:\\s*\\[([^\\]]*?)\\]`, "s");
@@ -42,7 +45,7 @@ function extractArrayField(block: string, field: string): string[] {
 }
 
 /**
- * Extract file paths from the `files` array in a registry item block.
+ * 从 registry 条目的 `files` 数组中提取文件路径。
  */
 function extractFilePaths(block: string): string[] {
   const filesMatch = block.match(/files:\s*\[([\s\S]*?)\]/);
@@ -57,7 +60,7 @@ function extractFilePaths(block: string): string[] {
 }
 
 /**
- * Parse a _registry.ts file and extract component metadata.
+ * 解析 `_registry.ts`，抽取组件元信息。
  */
 function parseRegistryFile(
   content: string,
@@ -68,6 +71,7 @@ function parseRegistryFile(
   let nameMatch: RegExpExecArray | null;
 
   while ((nameMatch = nameRegex.exec(content)) !== null) {
+    // 回溯到对象字面量起点，并通过大括号配对拿到完整块。
     const startIdx = content.lastIndexOf("{", nameMatch.index);
     if (startIdx === -1) continue;
 
@@ -96,7 +100,7 @@ function parseRegistryFile(
 }
 
 /**
- * Build the full component index from the registry directory.
+ * 从全部层级构建组件元信息索引。
  */
 export function buildComponentIndex(componentRoot: string): ComponentMeta[] {
   const layers: Array<{ dir: string; layer: "ui" | "blocks" | "composed" }> = [
@@ -120,7 +124,7 @@ export function buildComponentIndex(componentRoot: string): ComponentMeta[] {
 }
 
 /**
- * Search components by keyword (matches name, title, description).
+ * 按关键词搜索组件（匹配 name/title/description）。
  */
 export function searchComponents(
   components: ComponentMeta[],
@@ -129,6 +133,7 @@ export function searchComponents(
   const lower = query.toLowerCase();
   const terms = lower.split(/\s+/).filter(Boolean);
 
+  // 轻量词法打分，适配 MCP 场景下的模糊检索。
   return components
     .map((c) => {
       const searchText =
@@ -145,7 +150,7 @@ export function searchComponents(
 }
 
 /**
- * Read the source code of a component's files.
+ * 读取组件关联文件的源代码。
  */
 export function getComponentSource(
   componentRoot: string,
@@ -167,8 +172,8 @@ export function getComponentSource(
 }
 
 /**
- * Extract TypeScript interfaces/types from a component's source files.
- * Returns the raw interface/type declarations with JSDoc comments.
+ * 从组件源码中提取 TypeScript 的 interface/type。
+ * 返回包含 JSDoc 的原始声明片段。
  */
 export function extractComponentAPI(
   componentRoot: string,
@@ -194,8 +199,8 @@ export function extractComponentAPI(
 }
 
 /**
- * Extract interface and type declarations (with JSDoc) from TypeScript source.
- * Skips import type statements and inline type imports.
+ * 从 TypeScript 源码中提取 interface/type 声明（含 JSDoc）。
+ * 会跳过 import type 语句和内联 import type 片段。
  */
 function extractTypeDeclarations(source: string): string[] {
   const declarations: string[] = [];
@@ -204,7 +209,7 @@ function extractTypeDeclarations(source: string): string[] {
   for (let i = 0; i < lines.length; i++) {
     const trimmed = lines[i].trim();
 
-    // Skip import lines
+    // 跳过 import 语句及相关内联 type 片段。
     if (trimmed.startsWith("import ") || trimmed.startsWith("type ") && lines[Math.max(0, i - 1)]?.trim().startsWith("import")) {
       continue;
     }
@@ -214,7 +219,7 @@ function extractTypeDeclarations(source: string): string[] {
 
     if (!isInterface && !isType) continue;
 
-    // Walk backward to find JSDoc comment start
+    // 向上回溯，尽量包含最近的 JSDoc 或相邻注释。
     let jsdocStart = i;
     for (let j = i - 1; j >= 0; j--) {
       const prev = lines[j].trim();
@@ -228,14 +233,14 @@ function extractTypeDeclarations(source: string): string[] {
         break;
       }
     }
-    // Adjust: if the line before jsdocStart is blank, don't include it
+    // 避免提取片段出现多余前导空行。
     if (jsdocStart < i && lines[jsdocStart].trim() === "") {
       jsdocStart++;
     }
 
-    // For single-line type aliases (no braces)
+    // 处理不带对象体的紧凑 type 别名。
     if (isType && !lines[i].includes("{")) {
-      // Find the semicolon end
+      // 查找分号结束位置。
       let end = i;
       while (end < lines.length && !lines[end].includes(";")) {
         end++;
@@ -244,7 +249,7 @@ function extractTypeDeclarations(source: string): string[] {
       continue;
     }
 
-    // For interfaces and types with braces - find matching closing brace
+    // 处理带大括号的声明，通过括号深度配对结束位置。
     let depth = 0;
     let end = i;
     for (let k = i; k < lines.length; k++) {
@@ -265,15 +270,15 @@ function extractTypeDeclarations(source: string): string[] {
 }
 
 /**
- * Suggest components based on a natural language description.
- * Uses keyword matching to find relevant components.
+ * 根据自然语言描述推荐组件。
+ * 结合关键词映射与文本匹配进行排序。
  */
 export function suggestComponents(
   components: ComponentMeta[],
   description: string,
 ): Array<{ component: ComponentMeta; reason: string }> {
   const KEYWORD_MAP: Record<string, string[]> = {
-    // English keywords
+    // 英文关键词
     chat: ["message", "message-list", "sender", "responsive-sender"],
     message: ["message", "message-list", "avatar-header"],
     input: ["sender", "responsive-sender", "block-input", "dynamic-form"],
@@ -325,7 +330,7 @@ export function suggestComponents(
     report: ["report-card"],
     goal: ["goal-card"],
     quote: ["quote-content"],
-    // Chinese keywords
+    // 中文关键词
     聊天: ["message", "message-list", "sender", "responsive-sender", "sidebar"],
     消息: ["message", "message-list", "avatar-header"],
     对话: ["message", "message-list", "sender", "responsive-sender"],
@@ -378,44 +383,60 @@ export function suggestComponents(
   };
 
   const lower = description.toLowerCase();
-  const matchedNames = new Set<string>();
   const reasons = new Map<string, string[]>();
+  const scores = new Map<string, number>();
+
+  // 统一积分类入口，便于维护排序策略。
+  const addScore = (name: string, delta: number, reason: string) => {
+    scores.set(name, (scores.get(name) ?? 0) + delta);
+    if (!reasons.has(name)) reasons.set(name, []);
+    reasons.get(name)!.push(reason);
+  };
 
   for (const [keyword, names] of Object.entries(KEYWORD_MAP)) {
     if (lower.includes(keyword)) {
       for (const name of names) {
-        matchedNames.add(name);
-        if (!reasons.has(name)) reasons.set(name, []);
-        reasons.get(name)!.push(keyword);
+        addScore(name, 3, keyword);
       }
     }
   }
 
+  // 融合关键词匹配与文本检索，提高召回率。
   const textResults = searchComponents(components, description);
-  for (const c of textResults.slice(0, 5)) {
-    matchedNames.add(c.name);
-    if (!reasons.has(c.name)) reasons.set(c.name, ["description match"]);
+  for (const [idx, c] of textResults.slice(0, 8).entries()) {
+    addScore(c.name, Math.max(1, 6 - idx), "description match");
   }
 
   const componentMap = new Map(components.map((c) => [c.name, c]));
-  const suggestions: Array<{ component: ComponentMeta; reason: string }> = [];
+  const suggestions: Array<{
+    component: ComponentMeta;
+    reason: string;
+    score: number;
+  }> = [];
 
-  for (const name of matchedNames) {
+  for (const [name, baseScore] of scores.entries()) {
     const comp = componentMap.get(name);
-    if (comp) {
-      const reasonList = reasons.get(name) || [];
-      suggestions.push({
-        component: comp,
-        reason: `Matched keywords: ${reasonList.join(", ")}`,
-      });
-    }
+    if (!comp) continue;
+
+    // 页面组装场景下，优先提升高层组件权重。
+    const layerBoost = comp.layer === "composed" ? 4 : comp.layer === "blocks" ? 2 : 0;
+    const reasonList = Array.from(new Set(reasons.get(name) || []));
+
+    suggestions.push({
+      component: comp,
+      reason: `Matched by: ${reasonList.join(", ")}`,
+      score: baseScore + layerBoost,
+    });
   }
 
-  return suggestions;
+  return suggestions
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 12)
+    .map(({ component, reason }) => ({ component, reason }));
 }
 
 /**
- * Format component metadata as readable text.
+ * 将组件元信息格式化为可读文本。
  */
 export function formatComponentList(components: ComponentMeta[]): string {
   const grouped: Record<string, ComponentMeta[]> = {};
